@@ -49,6 +49,5 @@ RUN chown -R ${USERNAME}:${GROUPNAME} ${WORKDIR}
 # Install Python packages
 COPY pyproject.toml ./
 COPY poetry.lock ./
+RUN poetry config virtualenvs.in-project true
 RUN poetry install
-# disable virtual environment
-RUN poetry config virtualenvs.create false
