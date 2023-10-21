@@ -2,7 +2,8 @@
 	"name": "pytorch_learning",
 	"image": "pytorch_learning:latest",
 	"runArgs": [
-		"--gpus all"
+		"--gpus=all",
+		"--shm-size=16g"
 	],
 	"workspaceFolder": "/workspace",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
