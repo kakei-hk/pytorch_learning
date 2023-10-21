@@ -28,4 +28,9 @@ to launch a container.
 ```
 $ ./docker/docker_run.sh
 ```
-2. 
+2. Launch poetry virtual environment with the following command.
+```
+$ poetry shell
+```
+If you want to debug with devcontainer, select "Python: Select Interpreter"
+and "Python xxxx ('.venv':Poetry)" from the command palette.
