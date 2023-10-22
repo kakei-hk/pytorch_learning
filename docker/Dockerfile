@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu20.04
 
 ARG USERNAME="developer"
 ARG GROUPNAME="developer"
@@ -39,15 +39,16 @@ ENV POETRY_HOME="/opt/poetry"
 ENV PATH="${POETRY_HOME}/bin:${PATH}"
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
+# set work directory
+WORKDIR ${WORKDIR}
+
 # Modify authority
 RUN groupadd -g ${GID} ${GROUPNAME} \
     && useradd -m -s /bin/bash -u ${UID} -g ${GID} ${GROUPNAME}
-USER ${USERNAME}
-WORKDIR ${WORKDIR}
 RUN chown -R ${USERNAME}:${GROUPNAME} ${WORKDIR}
+USER ${USERNAME}
 
 # Install Python packages
-COPY pyproject.toml ./
-COPY poetry.lock ./
+COPY pyproject.toml poetry.lock ${WORKDIR}
 RUN poetry config virtualenvs.in-project true
 RUN poetry install
